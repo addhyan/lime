@@ -144,7 +144,7 @@ predict_model.xgb.Booster <- function(x, newdata, type, ...) {
     stop('The xgboost package is required for predicting xgboost models')
   }
   if (is.data.frame(newdata)) {
-    newdata <- xgboost::xgb.DMatrix(as.matrix(newdata))
+    newdata <- xgboost::xgb.DMatrix(data.matrix(newdata), missing=NA)
   }
   p <- data.frame(predict(x, newdata = newdata, reshape = TRUE, ...), stringsAsFactors = FALSE)
   if (type == 'raw') {
